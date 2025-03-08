@@ -1,0 +1,23 @@
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Dependencies
+/node_modules
+
+# Angular
+/.angular
+
+# IDEs and editors
+/.idea
+/.vscode
+
+# Misc
+npm-debug.log
+yarn-error.log
+.DS_Store
+
+# Package files
+package-lock.json
