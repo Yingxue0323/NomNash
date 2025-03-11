@@ -9,6 +9,7 @@ import { RestaurantCardComponent } from "./components/restaurant-card/restaurant
 import { HomePageComponent } from "./pages/home-page/home-page.component"
 import { SearchFormComponent } from "./components/search-form/search-form.component"
 import { StarRatingComponent } from "./components/star-rating/star-rating.component"
+import { LaunchPageComponent } from "./pages/launch-page/launch-page.component"
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { StarRatingComponent } from "./components/star-rating/star-rating.compon
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: "", component: HomePageComponent },
+      { path: "", component: LaunchPageComponent },
       { path: "**", redirectTo: "" },
     ]),
   ],
