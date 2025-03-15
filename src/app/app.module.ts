@@ -10,6 +10,7 @@ import { HomePageComponent } from "./pages/home-page/home-page.component"
 import { SearchFormComponent } from "./components/search-form/search-form.component"
 import { StarRatingComponent } from "./components/star-rating/star-rating.component"
 import { LaunchPageComponent } from "./pages/launch-page/launch-page.component"
+import { SignUpPageComponent } from "./pages/sign-up-page/sign-up-page.component"
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LaunchPageComponent } from "./pages/launch-page/launch-page.component"
     BrowserModule,
     RouterModule.forRoot([
       { path: "", component: LaunchPageComponent },
+      { path: "signup", component: SignUpPageComponent },
       { path: "**", redirectTo: "" },
     ]),
   ],
