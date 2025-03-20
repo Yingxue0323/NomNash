@@ -17,3 +17,11 @@
   border-color: #EF5252;
   color: white;
 }
+
+.left-side {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 100vh;
+  padding: 0 10%;
+}
