@@ -1,0 +1,76 @@
+<div class = "dashboard-container">
+    <div class = "sidebar">
+        <div class = "logo-container">
+            <img src = "assets/nomnash-logo.png" alt = "NomNash Logo" class = "sidebar-logo">
+        </div>
+
+        <div class = "user-info">
+            <div class = "user-name">John</div>
+            <div class = "user-role">Student Account</div>
+        </div>
+    </div>
+
+    <div class = "main-content">
+        <div class = "top-header">
+            <div class = "app-title">
+                <span class = "app-name">NomNash</span>
+                <span class = "app-tagline">Food on Campus!</span>
+        </div>
+        <div class = "user-avatar">
+            <img src = "assets/avatar-placeholder.png" alt = "User Avatar">
+        </div>
+    </div>
+    
+
+    <div class = "profile-content">
+        <div class = "profile-details">
+
+            <div class = "detail-row">
+                <div class = "detail-label">Name</div>
+                <div class = "detail-value">
+                    <input type = "text" [disabled] = "!isEditing" [(ngModel)] = "studentProfile.name">
+                </div>
+            </div>
+
+            <div class = "detail-row">
+                <div class = "detail-label">Email</div>
+                <div class = "detail-value">
+                    <input type = "email" [disabled] = "!isEditing" [(ngModel)] = "studentProfile.email">
+                </div>
+            </div>
+
+            <div class = "detail-row">
+                <div class = "detail-label">Role</div>
+                <div class = "detail-value">
+                    <input type = "role" [disabled] = "!isEditing" [(ngModel)] = "studentProfile.role">
+                </div>
+            </div>
+
+            <div class = "detail-row">
+                <div class = "detail-label">Password</div>
+                <div class = "detail-value">
+                    <input type = "password" [disabled] = "!isEditing" [(ngModel)] = "studentProfile.password">
+                </div>
+            </div>
+
+            <div class = "profile-actions">
+                <button class = "edit-btn" *ngIf = "!isEditing" (click) = "toggleEdit()">Edit</button>
+                <button class = "save-btn" *ngIf = "isEditing" (click) = "saveChanges()">Save Changes</button>
+            </div>
+        </div>
+
+        <div class = "content-boxes">
+            <div class = "box favourites-box">
+                <div class = "box-header">
+                    <h2>Favourites</h2>
+                </div>
+            </div>
+
+            <div class = "box reviews-box">
+                <div class = "box-header">
+                    <h2>Reviews</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
