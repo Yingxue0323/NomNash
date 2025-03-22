@@ -23,7 +23,7 @@ import { StudentProfileComponent } from "./pages/student-profile/student-profile
     HomePageComponent,
     SearchFormComponent,
     StarRatingComponent,
-    StudentProfileComponent,
+    
   ],
   imports: [
     BrowserModule,

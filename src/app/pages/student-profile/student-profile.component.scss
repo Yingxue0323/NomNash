@@ -1,40 +1,32 @@
+// Main container
 .dashboard-container {
-    display: flex;
-    min-height: 100vh;
+    display: flex; // Row layout
+    min-height: 100vh; // Full vertical height
     background-color: #fff;
-    position: relative;
+    position: relative; // Child elements can use absolute positiong if needed 
 }
 
+// Sidebar styling 
 .sidebar {
     width: 230px;
     background-color: #f7b0b0;
-    color: white;
-    padding: 20px;
-    padding-top: 80px;
+    color: white; // Text colour
+    padding: 20px; // Spacing within sidebar content 
+    padding-top: 80px; // Top spacing
     display: flex; 
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; // Info stacked/presented vertically 
+    align-items: center; // Center horizontally 
     position: relative;
-}
-
-.login-container {
-    margin-top: 60px;
-    margin-bottom: 20px;
-
-    .sidebar-logo {
-        width: 100px;
-        height: 100px;
-    }
 }
 
 .user-info {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 10px; // Spacing above
 
     .user-name {
         font-size: 24px;
         font-weight: bold;
-        margin-bottom: 10px;
+        margin-bottom: 10px; // Spacing below 
     }
 
     .user-role {
@@ -42,19 +34,20 @@
     }
 }
 
+// Main content (right of sidebar) styling 
 .main-content {
-    flex: 1;
+    flex: 1; // Fill remaining space, left to right
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
 
     .user-avatar {
-        position: absolute;
+        position: absolute; // Avatar position absolutely at the top right
         top: 20px;
         right: 20px;
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        overflow: hidden;
+        overflow: hidden; // Hides overflow from image if bigger than container
         background-color: #ccc;
 
         img {
@@ -74,7 +67,7 @@
     margin-bottom: 30px;
 
     .detail-row {
-        display: flex;
+        display: flex; // Label, email, and its value side by side 
         margin-bottom: 20px;
     }
 
@@ -91,17 +84,12 @@
         input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #ddd; // Light grey boarder
             border-radius: 5px;
             background-color: #f0f0f0;
             font-size: 16px;
-
-            &:disabled {
-                background-color: #f0f0f0;
-                color: #333;
-            }
         }
-
+        // Styling for the password input field, as seen in the design in figma 
         input[type = "password"] {
             background-color: yellow;
             color: black;
@@ -109,7 +97,7 @@
     }
 
 }
-
+// Edit and Save Changed buttons styling
 .profile-actions {
     margin-top: 20px;
 
@@ -129,20 +117,9 @@
 
     .save-btn {
         background-color: #2196f3;
-    }
-
-    .profile-details {
-        .detail-row {
-            flex-direction: column;
-        }
-
-        .detail-label {
-            width: 100%;
-            margin-bottom: 5px;
-        }
-    }
+    }   
 }
-
+// Containers for Favourites and Reviews box 
 .content-boxes {
     display: flex;
     gap: 20px;
@@ -150,7 +127,7 @@
 }
 
 .box {
-    flex: 1;
+    flex: 1; // Boxes grow and shrink depending on the size of info inside them
     background-color: #f0f0f0;
     border-radius: 8px;
     overflow: hidden;
