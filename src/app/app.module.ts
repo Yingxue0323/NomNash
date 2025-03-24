@@ -27,6 +27,7 @@ import { SignUpPageComponent } from "./pages/sign-up-page/sign-up-page.component
     RouterModule.forRoot([
       { path: "", component: LaunchPageComponent },
       { path: "signup", component: SignUpPageComponent },
+      { path: "home", component: HomePageComponent },
       { path: "**", redirectTo: "" },
     ]),
   ],

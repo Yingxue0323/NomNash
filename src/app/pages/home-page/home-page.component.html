@@ -1,16 +1,13 @@
 <main class="flex-1">
-  <section class="bg-[#1a1e33] py-16 text-white">
+  <section class="bg-[#F7B0B0] py-16 text-white">
     <div class="container px-4 md:px-6">
-      <h1 class="text-center text-3xl font-bold md:text-4xl lg:text-5xl mb-8">
-        Find your table for any occasion
-      </h1>
       <app-search-form></app-search-form>
     </div>
   </section>
   <section class="py-8">
     <div class="container px-4 md:px-6">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold">Order takeout</h2>
+        <h2 class="text-2xl font-bold">Top-Rated</h2>
         <a href="#" class="text-red-600 hover:underline">
           View all
         </a>
@@ -30,36 +27,28 @@
       </div>
     </div>
   </section>
-  <section class="py-8">
+
+  <section class="py-8 bg-gray-100">
     <div class="container px-4 md:px-6">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold">Get it delivered</h2>
-      </div>
+        <h2 class="text-2xl font-bold">Near You</h2>
         <a href="#" class="text-red-600 hover:underline">
           View all
         </a>
-    </div>
-  </section>
-  <section class="py-12 bg-gray-100">
-    <div class="container px-4 md:px-6 text-center">
-      <div class="mx-auto max-w-3xl">
-        <p class="mb-6 text-lg">
-          Join the more than 50,000 restaurants which fill seats and manage reservations with OpenTable.
-        </p>
-        <button class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded">
-          Learn more
-        </button>
       </div>
-    </div>
-  </section>
-  <section class="py-8">
-    <div class="container px-4 md:px-6 text-center">
-      <p>
-        Favorite restaurant not yet on OpenTable?
-        <a href="#" class="text-red-600 hover:underline">
-          Suggest a restaurant.
-        </a>
-      </p>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+        <app-restaurant-card
+          *ngFor="let restaurant of restaurants"
+          [name]="restaurant.name"
+          [image]="restaurant.image"
+          [rating]="restaurant.rating"
+          [reviews]="restaurant.reviews"
+          [cuisine]="restaurant.cuisine"
+          [priceRange]="restaurant.priceRange"
+          [location]="restaurant.location"
+          [phone]="restaurant.phone"
+        ></app-restaurant-card>
+      </div>
     </div>
   </section>
 </main>
