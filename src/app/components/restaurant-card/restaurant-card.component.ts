@@ -1,9 +1,12 @@
 import { Component, Input } from "@angular/core"
+import { CommonModule } from '@angular/common';
+import { StarRatingComponent } from "../star-rating/star-rating.component";
 
 @Component({
   selector: "app-restaurant-card",
   templateUrl: "./restaurant-card.component.html",
   standalone: true,
+  imports: [CommonModule, StarRatingComponent],
 })
 export class RestaurantCardComponent {
   @Input() name = ""

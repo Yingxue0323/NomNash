@@ -28,6 +28,8 @@ import { StudentProfileComponent } from "./pages/student-profile/student-profile
   imports: [
     BrowserModule,
     FormsModule,
+    RestaurantCardComponent,
+    StarRatingComponent,
     RouterModule.forRoot([
       { path: "", component: LaunchPageComponent },
       { path: "signup", component: SignUpPageComponent },
