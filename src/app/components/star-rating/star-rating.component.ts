@@ -1,7 +1,10 @@
 import { Component, Input } from "@angular/core"
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: "app-star-rating",
+  standalone: true,
+  imports: [CommonModule],
   template: `
     <div class="flex">
       <ng-container *ngFor="let star of stars; let i = index">

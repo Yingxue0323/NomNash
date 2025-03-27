@@ -72,11 +72,35 @@
                 <div class = "box-header">
                     <h2>Favourites</h2>
                 </div>
+
+                <div class = "box-content">
+                    <!-- Vertical Slider -->
+                    <div class = "favourites-scroller">
+                        <div class = "favourite-item" *ngFor = "let fav of favouriteRestaurants">
+                            {{ fav }}
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- Reviews Box -->
             <div class = "box reviews-box">
                 <div class = "box-header">
                     <h2>Reviews</h2>
+                </div>
+                <div class = "box-content">
+                    <div class = "reviews-scroller">
+                        <div class = "review-item" *ngFor = "let review of pastReviews">
+                            <div class = "review-resaurant">
+                                {{ review.restaurantName }}
+                            </div>
+                            <div class = "review-rating">
+                                <app-star-rating [rating] = "review.rating"></app-star-rating>
+                            </div>
+                            <div class = "review-text">
+                                {{ review.text }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

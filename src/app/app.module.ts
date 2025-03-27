@@ -19,10 +19,10 @@ import { StudentProfileComponent } from "./pages/student-profile/student-profile
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    RestaurantCardComponent,
+    // RestaurantCardComponent,
     HomePageComponent,
     SearchFormComponent,
-    StarRatingComponent,
+    // StarRatingComponent,
     
   ],
   imports: [
