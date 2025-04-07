@@ -1,10 +1,35 @@
 <header class="bg-[#f7b0b0] text-white">
-  <div class="container flex h-24 justify-center px-4 md:px-6">
-    <div class="flex items-center gap-2">
-      <a href="/" class="flex items-center gap-2">
-        <img src="assets/nomnash-logo.png" alt="NomNash" class="h-20 w-auto" />
-        <span class="text-xl font-bold">NomNash</span>
-      </a>
-    </div>
+  <div class="container flex h-24 justify-between items-center px-4 md:px-6">
+    
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2">
+      <img src="assets/nomnash-logo.png" alt="NomNash" class="h-20 w-auto" />
+      <span class="text-xl font-bold">NomNash</span>
+    </a>
+
+    <!-- Hamburger Button -->
+    <button id="menu-toggle" class="text-white focus:outline-none">
+      <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+        viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
   </div>
+
+  <!-- Dropdown Nav -->
+  <nav id="menu" class="hidden absolute top-24 left-0 w-full bg-[#f7b0b0] text-white flex-col items-center py-4 space-y-4">
+    <a href="#" class="block text-lg">Home</a>
+    <a href="#" class="block text-lg">About</a>
+    <a href="#" class="block text-lg">Services</a>
+    <a href="#" class="block text-lg">Contact</a>
+  </nav>
 </header>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('menu');
+
+  menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
