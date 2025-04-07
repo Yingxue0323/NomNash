@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core"
 import { BrowserModule } from "@angular/platform-browser"
 import { RouterModule } from "@angular/router"
+import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from "./app.component"
 import { HeaderComponent } from "./components/header/header.component"
@@ -11,19 +12,24 @@ import { SearchFormComponent } from "./components/search-form/search-form.compon
 import { StarRatingComponent } from "./components/star-rating/star-rating.component"
 import { LaunchPageComponent } from "./pages/launch-page/launch-page.component"
 import { SignUpPageComponent } from "./pages/sign-up-page/sign-up-page.component"
+import { StudentProfileComponent } from "./pages/student-profile/student-profile.component"
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    RestaurantCardComponent,
+    // RestaurantCardComponent,
     HomePageComponent,
     SearchFormComponent,
-    StarRatingComponent,
+    // StarRatingComponent,
+    
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    RestaurantCardComponent,
+    StarRatingComponent,
     RouterModule.forRoot([
       { path: "", component: LaunchPageComponent },
       { path: "signup", component: SignUpPageComponent },
