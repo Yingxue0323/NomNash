@@ -33,7 +33,8 @@ import { StudentProfileComponent } from "./pages/student-profile/student-profile
     RouterModule.forRoot([
       { path: "", component: LaunchPageComponent },
       { path: "signup", component: SignUpPageComponent },
-      { path: "student", component: StudentProfileComponent},
+      { path: "home", component: HomePageComponent },
+      { path: "student", component: StudentProfileComponent },
       { path: "**", redirectTo: "" },
     ]),
   ],

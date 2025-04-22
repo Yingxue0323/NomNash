@@ -1,7 +1,27 @@
-username-input {
-  margin-bottom: 20px;
+.username-input {
+  background-color: #F38181;
+  color: white;
 }
 
-special-submit {
-  margin-top: 20px;
+::placeholder {
+  color: #F7B0B0;
+}
+
+.radio-pink:checked {
+  background-color: #F38181;
+  border-color: #F38181;
+}
+
+.pink-button {
+  background-color: #EF5252;
+  border-color: #EF5252;
+  color: white;
+}
+
+.left-side {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 100vh;
+  padding: 0 10%;
 }
