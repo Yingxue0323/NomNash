@@ -34,6 +34,7 @@ import { StudentProfileComponent } from "./pages/student-profile/student-profile
       { path: "", component: LaunchPageComponent },
       { path: "signup", component: SignUpPageComponent },
       { path: "home", component: HomePageComponent },
+      { path: "student", component: StudentProfileComponent },
       { path: "**", redirectTo: "" },
     ]),
   ],
