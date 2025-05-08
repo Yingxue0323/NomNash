@@ -1,0 +1,215 @@
+// Main container
+.dashboard-container {
+    display: flex; // Row layout
+    min-height: 100vh; // Full vertical height
+    background-color: #fff;
+    position: relative; // Child elements can use absolute positiong if needed 
+}
+
+// Sidebar styling 
+.sidebar {
+    width: 230px;
+    background-color: #f7b0b0;
+    color: white; // Text colour
+    padding: 20px; // Spacing within sidebar content 
+    padding-top: 80px; // Top spacing
+    display: flex; 
+    flex-direction: column; // Info stacked/presented vertically 
+    align-items: center; // Center horizontally 
+    position: relative;
+
+    .logo-container {
+        .sidebar-logo {
+            width: 80px;
+            height: auto;
+        }
+    }
+
+    .user-info {
+        text-align: center;
+        margin-top: 10px; // Spacing above
+    
+        .user-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px; // Spacing below 
+        }
+    
+        .user-role {
+            font-size: 16px;
+        }
+    }
+}
+
+// Main content (right of sidebar) styling 
+.main-content {
+    flex: 1; // Fill remaining space, left to right
+    display: flex;
+    flex-direction: column; 
+
+    .top-header {
+        position: relative;
+        padding: 20px;
+        background-color: #fdfdfd;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .app-title {
+            display: flex;
+            flex-direction: column;
+
+            .app-name {
+                font-size: 32px;
+                flex-direction: column;
+            }
+
+            .app-tagline {
+                font-size: 14px;
+                color: #666;
+            }
+        }
+    }
+
+    .user-avatar {
+        position: absolute; // Avatar position absolutely at the top right
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden; // Hides overflow from image if bigger than container
+        background-color: #ccc;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.profile-content { 
+    flex: 1;
+    padding: 30px;
+
+    .profile-details {
+        margin-bottom: 30px;
+    
+        .detail-row {
+            display: flex; // Label, email, and its value side by side 
+            margin-bottom: 20px;
+
+            .detail-label {
+                width: 100px;
+                font-weight: bold;
+                font-size: 18px;
+                padding-top: 10px;
+            }
+
+            .detail-value {
+                flex: 1;
+
+                input {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ddd; // Light grey boarder
+                    border-radius: 5px;
+                    background-color: #f0f0f0;
+                    font-size: 16px;
+                }
+                // Styling for the password input field, as seen in the design in figma 
+                input[type = "password"] {
+                    background-color: yellow;
+                    color: black;
+                }
+            }
+        } 
+        
+        // Edit and Save Changed buttons styling
+        .profile-actions {
+            margin-top: 20px;
+
+            button { 
+                padding: 10px 30px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                color: white;
+                background-color: #2196f3;
+                margin-right: 10px;
+            } 
+        }
+    }
+
+    // Containers for Favourites and Reviews box 
+    .content-boxes {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+
+        .box {
+            flex: 1; // Boxes grow and shrink depending on the size of info inside them
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+
+            .box-header {
+                padding: 16px;
+                background-color: #fff;
+                border-bottom: 1px solid #ddd;
+
+                h2 {
+                    margin: 0;
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+            }
+
+            .box-content {
+                max-height: 250px;
+                padding: 16px;
+                overflow-y: auto;
+
+                .favourites-scroller,
+                .reviews-scroller,
+                .business-scroller {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+
+                    .favourite-item,
+                    .review-item,
+                    .business-item {
+                        min-height: 80px;
+                        background-color: #fff;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        padding: 16px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+
+                        .review-title {
+                            font-weight: bold;
+                            margin-bottom: 5px;
+                        }
+
+                        .review-rating {
+                            margin-bottom: 5px;
+                        }
+
+                        .review-text {
+                            font-size: 14px;
+                            color: #555;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

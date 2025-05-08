@@ -176,7 +176,8 @@
                 overflow-y: auto;
 
                 .favourites-scroller,
-                .reviews-scroller {
+                .reviews-scroller,
+                .business-scroller {
                     display: flex;
                     flex-direction: column;
                     gap: 16px;
