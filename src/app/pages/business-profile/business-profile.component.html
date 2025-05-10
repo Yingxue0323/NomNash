@@ -1,1 +1,130 @@
-<p>business-profile works!</p>
+<!-- Dashboard Layout (Sidebar + Main Content) -->
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <button class="back-button" (click)="goBack()">&larr;</button>
+  
+      <div class="logo-container">
+        <img src="assets/nomnash-logo.png" alt="NomNash Logo" class="sidebar-logo">
+      </div>
+      <div class="user-info">
+        <div class="user-name">{{ profile.name.split(' ')[0] }}</div>
+        <div class="user-role">Business Account</div>
+      </div>
+    </div>
+  
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <div class="top-header">
+        <div class="app-title">
+          <span class="app-name">NomNash</span>
+          <span class="app-tagline">food on campus.</span>
+        </div>
+        <div class="header-actions">
+          <!-- search icon removed -->
+          <div class="user-avatar">
+            <img src="assets/avatar-placeholder.png" alt="User Avatar">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Profile + Boxes -->
+      <div class="profile-content">
+        <!-- Profile Details -->
+        <div class="profile-details">
+          <div class="detail-row">
+            <div class="detail-label">Name</div>
+            <div class="detail-value">
+              <input type="text" [disabled]="!isEditing" [(ngModel)]="profile.name">
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Role</div>
+            <div class="detail-value">
+              <input type="text" [disabled]="!isEditing" [(ngModel)]="profile.role">
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Password</div>
+            <div class="detail-value">
+              <input type="password" [disabled]="!isEditing" [(ngModel)]="profile.password">
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Email</div>
+            <div class="detail-value">
+              <input type="email" [disabled]="!isEditing" [(ngModel)]="profile.email">
+            </div>
+          </div>
+          <div class="profile-actions">
+            <button class="edit-btn" *ngIf="!isEditing" (click)="toggleEdit()">Edit</button>
+            <button class="save-btn" *ngIf="isEditing" (click)="saveChanges()">Save Changes</button>
+          </div>
+        </div>
+  
+        <!-- Boxes -->
+        <div class="content-boxes">
+          <!-- Business List -->
+          <div class="box business-box">
+            <div class="box-header"><h2>Business List</h2></div>
+            <div class="box-content">
+              <div class="business-scroller">
+                <div class="business-item" *ngFor="let b of businessList">
+                  {{ b.name }} and Details
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <div class="pagination">
+                … <span class="page-control">&lt;</span>
+                Page 1 of {{ businessTotalPages }}
+                <span class="page-control">&gt;</span> …
+              </div>
+              <div class="footer-action">Manage Business &gt;</div>
+            </div>
+          </div>
+  
+          <!-- Reviews -->
+          <div class="box reviews-box">
+            <div class="box-header">
+              <h2>Reviews</h2>
+            </div>
+            <div class="box-content">
+              <div class="reviews-scroller">
+                <div class="review-item" *ngFor="let r of pastReviews">
+                  <div class="review-title">{{ r.restaurantName }}</div>
+                  <div class="review-rating">
+                    <app-star-rating [rating]="r.rating"></app-star-rating>
+                  </div>
+                  <div class="review-text">{{ r.text }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <div class="pagination">
+                … <span class="page-control">&lt;</span>
+                Page 1 of {{ reviewTotalPages }}
+                <span class="page-control">&gt;</span> …
+              </div>
+            </div>
+          </div>
+  
+          <!-- Favourites -->
+          <div class="box favourites-box">
+            <div class="box-header">
+              <h2>Favourites <span class="favourite-header-star">★</span></h2>
+            </div>
+            <div class="box-content">
+              <div class="favourites-scroller">
+                <div class="favourite-item" *ngFor="let f of favouriteRestaurants">
+                  {{ f }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

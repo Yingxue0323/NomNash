@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StarRatingComponent } from 'src/app/components/star-rating/star-rating.component';
 
-interface StudentProfile { // StudentProfile object containing all relevant variables 
+interface StudentProfile {
   name: string;
   email: string;
   role: string;
@@ -17,55 +18,36 @@ interface StudentProfile { // StudentProfile object containing all relevant vari
   templateUrl: './student-profile.component.html',
   styleUrls: ['./student-profile.component.scss']
 })
-
 export class StudentProfileComponent {
-  isEditing = false; // Track when profile is in edit mode 
-  studentProfile: StudentProfile = { // Object holding student profile details, all initialised with default values
+  isEditing = false;
+  profile: StudentProfile = {
     name: 'John Doe',
     email: 'johndoe@student.monash.edu',
     role: 'Student',
     password: '********'
   };
 
-  favouriteRestaurants: string[] = [
-    "Restaurant 1",
-    "Restaurant 2",
-    "Restaurant 3",
-    "Restaurant 4"
+  favouriteRestaurants = [
+    'Restaurant Name 1',
+    'Restaurant Name 2',
+    'Restaurant Name 3',
+    'Restaurant Name 4'
   ];
-
   pastReviews = [
-    {
-      restaurantName: "Peri Peri Chicken",
-      rating: 4,
-      text: "Chicken!",
-    },
-
-    {
-      restaurantName: "Guzman Y Gomez",
-      rating: 5,
-      text: "Mexican Dishes!",
-    },
-
-    {
-      restaurantName: "Peri Peri Chicken",
-      rating: 4,
-      text: "Chicken!",
-    },
-
-    {
-      restaurantName: "Guzman Y Gomez",
-      rating: 5,
-      text: "Mexican Dishes!",
-    },
+    { restaurantName: 'Review 1', rating: 0, text: '' },
+    { restaurantName: 'Review 2', rating: 0, text: '' },
+    { restaurantName: 'Review 3', rating: 0, text: '' }
   ];
 
-  toggleEdit(): void { // Toggles editing depending on boolean value 
-    this.isEditing = !this.isEditing;
-  }
+  favTotalPages = 1;
+  reviewTotalPages = 1;
 
-  saveChanges(): void { // Save changes function
+  constructor(private location: Location) {}
+
+  goBack() { this.location.back(); }
+  toggleEdit() { this.isEditing = !this.isEditing; }
+  saveChanges() {
     this.isEditing = false;
-    console.log('Profile updated:', this.studentProfile);
+    console.log('Profile updated:', this.profile);
   }
 }

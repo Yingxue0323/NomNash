@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BusinessProfileComponent } from './business-profile.component';
 
 describe('BusinessProfileComponent', () => {
@@ -9,9 +8,8 @@ describe('BusinessProfileComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BusinessProfileComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(BusinessProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

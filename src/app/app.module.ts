@@ -13,6 +13,7 @@ import { StarRatingComponent } from "./components/star-rating/star-rating.compon
 import { LaunchPageComponent } from "./pages/launch-page/launch-page.component"
 import { SignUpPageComponent } from "./pages/sign-up-page/sign-up-page.component"
 import { StudentProfileComponent } from "./pages/student-profile/student-profile.component"
+import { BusinessProfileComponent } from "./pages/business-profile/business-profile.component"
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { StudentProfileComponent } from "./pages/student-profile/student-profile
       { path: "signup", component: SignUpPageComponent },
       { path: "home", component: HomePageComponent },
       { path: "student", component: StudentProfileComponent },
+      { path: "business", component: BusinessProfileComponent},
       { path: "**", redirectTo: "" },
     ]),
   ],

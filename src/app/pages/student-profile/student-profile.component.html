@@ -1,108 +1,117 @@
 <!-- Dashboard Layout (Sidebar + Main Content) -->
-<div class = "dashboard-container">
+<div class="dashboard-container">
     <!-- Sidebar -->
-    <div class = "sidebar">
-        <!-- NomNash logo within the side bar (should be at top) -->
-        <div class = "logo-container">
-            <img src = "assets/nomnash-logo.png" alt = "NomNash Logo" class = "sidebar-logo">
-        </div>
-        <!-- User info within the sidebar, contains student's name and the role of the account, business/student. These are just placeholders for now, need to make dynamic -->
-        <div class = "user-info">
-            <div class = "user-name">John</div>
-            <div class = "user-role">Student Account</div>
-        </div>
+    <div class="sidebar">
+      <button class="back-button" (click)="goBack()">&larr;</button>
+  
+      <div class="logo-container">
+        <img src="assets/nomnash-logo.png" alt="NomNash Logo" class="sidebar-logo">
+      </div>
+      <div class="user-info">
+        <div class="user-name">{{ profile.name.split(' ')[0] }}</div>
+        <div class="user-role">Student Account</div>
+      </div>
     </div>
-    <!-- Info to the right of the sidebar, name, email, password and account role -->
-    <div class = "main-content">
-        <!-- Should be containing the app's slogan "Food on Campus!" (Need to fix)-->
-        <div class = "top-header">
-            <div class = "app-title">
-                <span class = "app-name">NomNash</span>
-                <span class = "app-tagline">Food on Campus!</span>
+  
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <div class="top-header">
+        <div class="app-title">
+          <span class="app-name">NomNash</span>
+          <span class="app-tagline">food on campus.</span>
         </div>
-        <!-- A profile picture of the user's account should be appearing at the top right -->
-        <div class = "user-avatar">
-            <img src = "assets/avatar-placeholder.png" alt = "User Avatar">
+        <div class="header-actions">
+          <!-- search icon removed -->
+          <div class="user-avatar">
+            <img src="assets/avatar-placeholder.png" alt="User Avatar">
+          </div>
         </div>
+      </div>
+  
+      <!-- Profile + Boxes -->
+      <div class="profile-content">
+        <!-- Profile Details -->
+        <div class="profile-details">
+          <div class="detail-row">
+            <div class="detail-label">Name</div>
+            <div class="detail-value">
+              <input type="text" [disabled]="!isEditing" [(ngModel)]="profile.name">
+            </div>
+            <div class="detail-label">Email</div>
+            <div class="detail-value">
+              <input type="email" [disabled]="!isEditing" [(ngModel)]="profile.email">
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Role</div>
+            <div class="detail-value">
+              <input type="text" [disabled]="!isEditing" [(ngModel)]="profile.role">
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Password</div>
+            <div class="detail-value">
+              <input type="password" [disabled]="!isEditing" [(ngModel)]="profile.password">
+            </div>
+          </div>
+          <div class="profile-actions">
+            <button class="edit-btn" *ngIf="!isEditing" (click)="toggleEdit()">Edit</button>
+            <button class="save-btn" *ngIf="isEditing" (click)="saveChanges()">Save Changes</button>
+          </div>
+        </div>
+  
+        <!-- Favourites & Reviews Boxes -->
+        <div class="content-boxes">
+          <!-- Favourites -->
+          <div class="box favourites-box">
+            <div class="box-header">
+              <h2>Favourites <span class="favourite-header-star">★</span></h2>
+            </div>
+            <div class="box-content">
+              <div class="favourites-scroller">
+                <div class="favourite-item" *ngFor="let fav of favouriteRestaurants">
+                  {{ fav }}
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <div class="pagination">
+                … <span class="page-control">&lt;</span>
+                Page 1 of {{ favTotalPages }}
+                <span class="page-control">&gt;</span> …
+              </div>
+            </div>
+          </div>
+  
+          <!-- Reviews -->
+          <div class="box reviews-box">
+            <div class="box-header">
+              <h2>Reviews</h2>
+              <div class="star-header">
+                <ng-container *ngFor="let _ of [1,2,3,4,5]">
+                  <i class="star-outline"></i>
+                </ng-container>
+              </div>
+            </div>
+            <div class="box-content">
+              <div class="reviews-scroller">
+                <div class="review-item" *ngFor="let r of pastReviews">
+                  <div class="review-title">{{ r.restaurantName }}</div>
+                  <div class="review-actions">Edit / Delete</div>
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <div class="pagination">
+                … <span class="page-control">&lt;</span>
+                Page 1 of {{ reviewTotalPages }}
+                <span class="page-control">&gt;</span> …
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    <!-- Profile content stored below the header: Name, Email, Role and Password -->
-    <div class = "profile-content">
-        <div class = "profile-details">
-
-            <div class = "detail-row">
-                <div class = "detail-label">Name</div>
-                <div class = "detail-value">
-                    <!-- Input for the name field bound by ngModel, field is read-only unless isEditing is set to True by clicking -->
-                    <input type = "text" [disabled] = "!isEditing" [(ngModel)] = "studentProfile.name">
-                </div>
-            </div>
-
-            <div class = "detail-row">
-                <div class = "detail-label">Email</div>
-                <div class = "detail-value">
-                    <input type = "email" [disabled] = "!isEditing" [(ngModel)] = "studentProfile.email">
-                </div>
-            </div>
-
-            <div class = "detail-row">
-                <div class = "detail-label">Role</div>
-                <div class = "detail-value">
-                    <input type = "role" [disabled] = "!isEditing" [(ngModel)] = "studentProfile.role">
-                </div>
-            </div>
-
-            <div class = "detail-row">
-                <div class = "detail-label">Password</div>
-                <div class = "detail-value">
-                    <input type = "password" [disabled] = "!isEditing" [(ngModel)] = "studentProfile.password">
-                </div>
-            </div>
-            <!-- Edit and Save Changes button -->
-            <div class = "profile-actions">
-                <!-- Edit button shown when not editing and vice versa -->
-                <button class = "edit-btn" *ngIf = "!isEditing" (click) = "toggleEdit()">Edit</button>
-                <button class = "save-btn" *ngIf = "isEditing" (click) = "saveChanges()">Save Changes</button>
-            </div>
-        </div>
-        <!-- Container for the Favourites and Review section (In progress, need to add slider and placeholder values) -->
-        <div class = "content-boxes">
-            <!-- Favourites Box -->
-            <div class = "box favourites-box">
-                <div class = "box-header">
-                    <h2>Favourites</h2>
-                </div>
-
-                <div class = "box-content">
-                    <!-- Vertical Slider -->
-                    <div class = "favourites-scroller">
-                        <div class = "favourite-item" *ngFor = "let fav of favouriteRestaurants">
-                            {{ fav }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Reviews Box -->
-            <div class = "box reviews-box">
-                <div class = "box-header">
-                    <h2>Reviews</h2>
-                </div>
-                <div class = "box-content">
-                    <div class = "reviews-scroller">
-                        <div class = "review-item" *ngFor = "let review of pastReviews">
-                            <div class = "review-resaurant">
-                                {{ review.restaurantName }}
-                            </div>
-                            <div class = "review-rating">
-                                <app-star-rating [rating] = "review.rating"></app-star-rating>
-                            </div>
-                            <div class = "review-text">
-                                {{ review.text }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+  </div>
+  
