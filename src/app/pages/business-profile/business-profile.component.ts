@@ -52,10 +52,25 @@ export class BusinessProfileComponent {
 
   constructor(private location: Location) {}
 
-  goBack() { this.location.back(); }
-  toggleEdit() { this.isEditing = !this.isEditing; }
+  goBack() {
+    this.location.back();
+  }
+
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+  }
+
   saveChanges() {
     this.isEditing = false;
     console.log('Profile updated:', this.profile);
+  }
+
+  /** Remove a business from the list after confirmation */
+  removeBusiness(index: number): void {
+    const biz = this.businessList[index];
+    if (!biz) return;
+    if (confirm(`Remove "${biz.name}" from your business list?`)) {
+      this.businessList.splice(index, 1);
+    }
   }
 }

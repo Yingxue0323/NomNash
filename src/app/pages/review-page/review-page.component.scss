@@ -1,0 +1,179 @@
+.review-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 30px;
+    background-color: #fff;
+  
+    .header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+  
+      .restaurant-info {
+        .restaurant-name {
+          font-size: 32px;
+          margin: 0;
+        }
+        .restaurant-description {
+          color: #555;
+        }
+      }
+  
+      .rating-summary {
+        text-align: right;
+        .average-rating {
+          font-size: 48px;
+          font-weight: bold;
+          line-height: 1;
+        }
+        .stars { margin: 8px 0; }
+        .total-reviews { color: #555; }
+      }
+    }
+  
+    .rating-distribution {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+  
+      .bar-row {
+        display: flex;
+        align-items: center;
+  
+        .label {
+          width: 20px;
+        }
+        .bar-bg {
+          flex: 1;
+          height: 12px;
+          background-color: #ddd;
+          border-radius: 6px;
+          margin: 0 8px;
+  
+          .bar-fill {
+            height: 100%;
+            background-color: #fbc02d;
+            border-radius: 6px;
+          }
+        }
+      }
+    }
+  
+    .reviews-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+  
+      h2 { margin: 0; }
+  
+      .sort-options {
+        button {
+          padding: 6px 12px;
+          margin-right: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          background: #fff;
+          cursor: pointer;
+          &.active {
+            background: #2196f3;
+            color: #fff;
+            border-color: #2196f3;
+          }
+        }
+      }
+  
+      .review-list {
+        max-height: 400px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+  
+        .review-card {
+          background: #fff;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+  
+          .review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+  
+            .reviewer-avatar {
+              width: 32px;
+              height: 32px;
+              background: #ccc;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: bold;
+            }
+            .review-meta {
+              font-size: 12px;
+              color: #777;
+            }
+          }
+          .review-rating { margin: 4px 0; }
+          .review-body { color: #333; }
+        }
+      }
+    }
+  
+    .write-review {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+  
+      .rating-input {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+  
+        label {
+          font-weight: bold;
+        }
+        select {
+          padding: 4px 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+          background: #fff;
+        }
+        app-star-rating {
+          margin-left: 8px;
+        }
+      }
+  
+      textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        resize: vertical;
+      }
+  
+      .submit-review {
+        align-self: flex-end;
+        padding: 8px 16px;
+        background: #2196f3;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+  }
+  
