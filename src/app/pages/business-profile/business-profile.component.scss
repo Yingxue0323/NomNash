@@ -1,0 +1,284 @@
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #fff;
+    position: relative;
+  }
+  
+  // Sidebar
+  .sidebar {
+    width: 230px;
+    background-color: #f7b0b0;
+    color: white;
+    padding: 20px;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+  
+    .logo-container .sidebar-logo {
+      width: 80px;
+      height: auto;
+    }
+  
+    .user-info {
+      text-align: center;
+      margin-top: 10px;
+  
+      .user-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .user-role {
+        font-size: 16px;
+      }
+    }
+  }
+  
+  // Main Content
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  
+    .top-header {
+      background: #f3d2d2;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      .app-title {
+        .app-name,
+        .app-tagline {
+          color: white;
+          font-weight: bold;
+        }
+        .app-name {
+          font-size: 36px;
+        }
+        .app-tagline {
+          font-size: 16px;
+          font-weight: normal;
+        }
+      }
+  
+      .header-actions {
+        display: flex;
+        align-items: center;
+  
+        .user-avatar {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          overflow: hidden;
+          background: #ccc;
+  
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+  
+  // Profile + Boxes
+  .profile-content {
+    flex: 1;
+    padding: 30px;
+  
+    .profile-details {
+      margin-bottom: 30px;
+  
+      .detail-row {
+        display: flex;
+        margin-bottom: 20px;
+  
+        .detail-label {
+          width: 100px;
+          font-weight: bold;
+          font-size: 18px;
+          padding-top: 10px;
+        }
+        .detail-value {
+          flex: 1;
+  
+          input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            font-size: 16px;
+          }
+  
+          input[type="password"] {
+            background-color: yellow;
+            color: black;
+          }
+        }
+      }
+  
+      .profile-actions {
+        margin-top: 20px;
+  
+        button {
+          padding: 10px 30px;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          color: white;
+          background-color: #2196f3;
+          margin-right: 10px;
+        }
+      }
+    }
+  
+    .content-boxes {
+      display: flex;
+      gap: 20px;
+  
+      .box {
+        display: flex;
+        flex-direction: column;
+        background-color: #f0f0f0;
+        border-radius: 8px;
+        overflow: hidden;
+        flex: 1;
+  
+        .box-header {
+          padding: 16px;
+          background-color: #fff;
+          border-bottom: 1px solid #ddd;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+  
+          h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+          }
+  
+          .favourite-header-star {
+            margin-left: 8px;
+            color: gold;
+            font-size: 18px;
+          }
+        }
+  
+        .box-content {
+          padding: 16px;
+          overflow-y: auto;
+          max-height: 250px;
+  
+          .business-scroller,
+          .favourites-scroller {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+  
+            .business-item,
+            .favourite-item {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              background-color: #fff;
+              border: 1px solid #ddd;
+              border-radius: 8px;
+              padding: 16px;
+              min-height: 80px;
+            }
+          }
+  
+          .reviews-scroller {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+  
+            .review-item {
+              display: flex;
+              flex-direction: column;
+              background-color: #fff;
+              border: 1px solid #ddd;
+              border-radius: 8px;
+              padding: 16px;
+              gap: 8px;
+              min-height: 100px;
+  
+              .review-title {
+                font-weight: bold;
+                font-size: 16px;
+              }
+  
+              .review-rating {
+                /* star-rating component sits here */
+              }
+  
+              .review-text {
+                font-size: 14px;
+                color: #555;
+              }
+            }
+          }
+        }
+  
+        .box-footer {
+          padding: 8px 16px;
+          background-color: #fff;
+          border-top: 1px solid #ddd;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: auto;
+  
+          .pagination {
+            font-size: 14px;
+            .page-control {
+              cursor: pointer;
+              margin: 0 4px;
+            }
+          }
+  
+          .footer-action {
+            font-size: 14px;
+            color: #2196f3;
+            cursor: pointer;
+          }
+        }
+      }
+  
+      .business-box   { flex: 2; }
+      .reviews-box    { flex: 1.5; }
+      .favourites-box { flex: 1; }
+    }
+  
+    /* Remove button styling */
+    .remove-btn {
+      background-color: #e57373;
+      border: none;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  }
+  
