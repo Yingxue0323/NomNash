@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Form, FormGroup, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatabaseService } from 'src/app/database.service';
 import { User } from 'src/app/models/user';
@@ -15,12 +16,11 @@ export class SignUpPageComponent {
 
   user: User = new User();
 
-  constructor(private db: DatabaseService, private router: Router) { }
+  constructor(private db: DatabaseService, private router: Router) {}
 
   addUser() {
-    this.db.addUser(this.user).subscribe(() => {
-      this.router.navigate(['/']);
+    this.db.addUser(this.user).subscribe((response) => {
+      this.router.navigate(['/login']);
     });
   }
-
 }
