@@ -23,18 +23,7 @@ interface AuthForm {
   selector: "app-header",
   templateUrl: "./header.component.html"
 })
-<<<<<<< HEAD
-export class HeaderComponent {
-  constructor(public router: Router) {}
 
-  findRestaurantByName(name: string) {
-    if (name) {
-      this.router.navigate(["/restaurant", name])
-    } else {
-      this.router.navigate(["/"])
-    }
-  }
-=======
 export class HeaderComponent implements OnInit {
   isMenuOpen = false;
   showAuthModal = false;
@@ -303,5 +292,4 @@ export class HeaderComponent implements OnInit {
   selectRole(role: string) {
     this.selectedRole = role;
   }
->>>>>>> 7678bcc (Feature: lots of)
 }

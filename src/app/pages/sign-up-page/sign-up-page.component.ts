@@ -15,18 +15,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './sign-up-page.component.scss'
 })
 export class SignUpPageComponent {
-<<<<<<< HEAD
 
-  // user: User = new User();
-
-  // constructor(private db: DatabaseService, private router: Router) {}
-
-  // addUser() {
-  //   this.db.addUser(this.user).subscribe((response) => {
-  //     this.router.navigate(['/login']);
-  //   });
-  // }
-=======
   user: User = new User();
   
   private apiUrl = 'http://localhost:3000/api/v1/auth';
@@ -42,5 +31,4 @@ export class SignUpPageComponent {
   loginWithGoogle() {
     window.location.href = `${this.apiUrl}/login`;
   }
->>>>>>> 7678bcc (Feature: lots of)
 }

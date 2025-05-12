@@ -5,11 +5,8 @@
 <header class="bg-[#f7b0b0] text-white">
   <div class="container flex h-24 justify-between items-center px-4 md:px-6">
     <!-- Logo -->
-<<<<<<< HEAD
-    <a href="/home" class="flex items-center gap-2">
-=======
+
     <a routerLink="/home" class="flex items-center gap-2">
->>>>>>> 7678bcc (Feature: lots of)
       <img src="assets/nomnash-logo.png" alt="NomNash" class="h-20 w-auto" />
       <span class="text-xl font-bold">NomNash</span>
     </a>
@@ -25,21 +22,6 @@
         </div>
       </form>
 
-<<<<<<< HEAD
-      <!-- User Account Link -->
-      <button class="text-white text-xl" routerLink="/student">
-        <i class="bi bi-person"></i>
-      </button>
-
-      <!-- Logout Link -->
-      <button class="text-white text-xl" routerLink="/">
-        <i class="bi bi-box-arrow-right"></i>
-      </button>
-
-    </div>
-  </div>
-</header>
-=======
       <!-- User Profile / Login Button -->
       <div *ngIf="!isLoggedIn; else userProfile">
         <button (click)="openAuthModal()" class="btn bg-[#EF5252] text-white">
@@ -144,4 +126,3 @@
     </div>
   </div>
 </div>
->>>>>>> 7678bcc (Feature: lots of)
