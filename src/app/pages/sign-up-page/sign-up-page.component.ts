@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Form, FormGroup, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatabaseService } from 'src/app/database.service';
 import { User } from 'src/app/models/user';

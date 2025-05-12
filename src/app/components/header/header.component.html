@@ -11,6 +11,7 @@
       <span class="text-xl font-bold">NomNash</span>
     </a>
 
+    <!-- Search -->
     <div class="d-flex align-items-center gap-3">
       <form>          
         <div class="input-group">
@@ -21,31 +22,16 @@
         </div>
       </form>
 
-      <!-- Hamburger Button -->
-      <button id="menu-toggle" class="text-white focus:outline-none">
-        <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-          viewBox="0 0 24 24">
-          <path d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
+      <!-- User Account Link -->
+      <button class="text-white text-xl">
+        <i class="bi bi-person"></i>
       </button>
+
+      <!-- Logout Link -->
+      <button class="text-white text-xl">
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+
     </div>
-
   </div>
-
-  <!-- Dropdown Nav -->
-  <nav id="menu" class="hidden absolute top-24 left-0 w-full bg-[#f7b0b0] text-white flex-col items-center py-4 space-y-4">
-    <a href="#" class="block text-lg">Home</a>
-    <a href="#" class="block text-lg">About</a>
-    <a href="#" class="block text-lg">Services</a>
-    <a href="#" class="block text-lg">Contact</a>
-  </nav>
 </header>
-
-<script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('menu');
-
-  menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
-  });
-</script>

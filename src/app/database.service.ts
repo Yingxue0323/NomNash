@@ -10,6 +10,10 @@ export class DatabaseService {
   constructor(private http: HttpClient, private router: Router) { }
 
   addUser(user: any) {
-    return this.http.post('http://localhost:3000/api/users', user);
+    return this.http.post('http://localhost:3000/api/v1/users', user);
+  }
+
+  findRestaurantByName(name: string) {
+    return this.http.get(`http://localhost:3000/api/v1/restaurant/${name}`);
   }
 }

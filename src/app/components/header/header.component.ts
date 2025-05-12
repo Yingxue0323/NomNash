@@ -7,4 +7,12 @@ import { Router } from "@angular/router"
 })
 export class HeaderComponent {
   constructor(public router: Router) {}
+
+  findRestaurantByName(name: string) {
+    if (name) {
+      this.router.navigate(["/restaurant", name])
+    } else {
+      this.router.navigate(["/"])
+    }
+  }
 }
