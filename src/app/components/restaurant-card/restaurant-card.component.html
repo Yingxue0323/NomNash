@@ -1,26 +1,36 @@
-<div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
-  <a href="#" class="block">
+<div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden h-full flex flex-col">
+  <!-- Image section with fixed height -->
+  <div class="relative" style="height: 180px;">
     <img
       [src]="image || '/assets/images/placeholder.svg'"
       [alt]="name"
-      class="h-48 w-full object-cover"
+      class="w-full h-full object-cover"
     />
-  </a>
-  <div class="p-4">
-    <a href="#" class="block">
-      <h3 class="font-semibold">{{ name }}</h3>
-    </a>
-    <div class="mt-1 flex items-center">
+  </div>
+  
+  <!-- Content section with flex-grow to fill remaining height -->
+  <div class="p-4 flex-grow">
+    <h3 class="font-semibold text-lg mb-2 truncate" [title]="name">{{ name }}</h3>
+    <div class="flex items-center mb-2">
       <app-star-rating [rating]="rating"></app-star-rating>
       <span class="ml-2 text-sm text-gray-600">{{ reviews }} reviews</span>
     </div>
-    <div class="mt-2 text-sm text-gray-600">
-      <span>{{ cuisine }}</span> • <span>{{ priceRange }}</span> • <span>{{ location }}</span>
+    <div class="text-sm text-gray-600 mb-2">
+      <span>{{ cuisine }}</span>
+      <span *ngIf="priceRange"> • {{ priceRange }}</span>
+      <span *ngIf="location"> • {{ location }}</span>
+    </div>
+    <div *ngIf="phone" class="text-sm text-gray-600">
+      <a [href]="'tel:' + phone" class="hover:underline">
+        {{ phone }}
+      </a>
     </div>
   </div>
-  <div class="p-4 pt-0">
-    <a [href]="'tel:' + phone" class="text-sm text-gray-600 hover:underline">
-      {{ phone }}
+  
+  <!-- Footer/Action section -->
+  <div class="p-4 pt-2 mt-auto">
+    <a [routerLink]="['/restaurants', id]" class="inline-block w-full text-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors">
+      View Details
     </a>
   </div>
 </div>

@@ -2,8 +2,9 @@ import { NgModule } from "@angular/core"
 import { BrowserModule } from "@angular/platform-browser"
 import { RouterModule } from "@angular/router"
 import { FormsModule } from '@angular/forms'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { CommonModule } from '@angular/common'
 import { AppComponent } from "./app.component"
-import { HeaderComponent } from "./components/header/header.component"
 import { FooterComponent } from "./components/footer/footer.component"
 import { RestaurantCardComponent } from "./components/restaurant-card/restaurant-card.component"
 import { HomePageComponent } from "./pages/home-page/home-page.component"
@@ -14,6 +15,8 @@ import { StudentProfileComponent } from "./pages/student-profile/student-profile
 import { BusinessProfileComponent } from "./pages/business-profile/business-profile.component"
 import { ReviewPageComponent } from "./pages/review-page/review-page.component"
 import { SearchFormComponent } from "./components/search-form/search-form.component"
+import { HeaderComponent } from "./components/header/header.component"
+import { HttpInterceptor } from "./http.interceptor"
 
 @NgModule({
   declarations: [
@@ -22,25 +25,36 @@ import { SearchFormComponent } from "./components/search-form/search-form.compon
     FooterComponent,
     HomePageComponent,
     SearchFormComponent,
-    
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
+    CommonModule,
     RestaurantCardComponent,
     StarRatingComponent,
     RouterModule.forRoot([
-      { path: "", component: LaunchPageComponent },
-      { path: "signup", component: SignUpPageComponent },
+      { path: "", redirectTo: "home", pathMatch: "full" },
+      { path: "launch", component: LaunchPageComponent },
       { path: "home", component: HomePageComponent },
+      { path: "signup", component: SignUpPageComponent },
       { path: "student", component: StudentProfileComponent },
       { path: "business", component: BusinessProfileComponent},
       { path: "review-page", component: ReviewPageComponent},
-      { path: "**", redirectTo: "" },
-    ]),
+      { path: "restaurants/:id", component: ReviewPageComponent },
+      { path: "profile", component: StudentProfileComponent },
+      { path: "**", redirectTo: "home" },
+    ])
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}
 

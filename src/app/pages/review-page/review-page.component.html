@@ -1,80 +1,243 @@
 <div class="review-page-container">
-    <!-- Restaurant Header -->
-    <div class="header">
-      <div class="restaurant-info">
-        <h1 class="restaurant-name">{{ restaurant.name }}</h1>
-        <p class="restaurant-description">{{ restaurant.description }}</p>
-      </div>
-      <div class="rating-summary">
-        <div class="average-rating">{{ averageRating.toFixed(1) }}</div>
-        <div class="stars">
-          <app-star-rating [rating]="averageRating"></app-star-rating>
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading restaurant details...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-container">
+    <div class="error-message">
+      <p>{{ error }}</p>
+      <button (click)="fetchRestaurantDetails()">Try Again</button>
+    </div>
+  </div>
+
+  <!-- Content (only shown when not loading and no error) -->
+  <div *ngIf="!loading && !error && restaurant" class="content-container">
+    <!-- Top Section: Restaurant Info & Summary -->
+    <div class="restaurant-header">
+      <!-- Main Restaurant Info -->
+      <div class="restaurant-main-info">
+        <h1 class="restaurant-name">{{ restaurant.name || 'Restaurant Details' }}</h1>
+        
+        <!-- Rating Summary -->
+        <div class="rating-summary-row">
+          <div class="rating-badge">{{ averageRating.toFixed(1) }}</div>
+          <div class="rating-stars">
+            <app-star-rating [rating]="averageRating"></app-star-rating>
+          </div>
+          <div class="review-count">{{ totalReviews }} reviews</div>
         </div>
-        <div class="total-reviews">{{ totalReviews }} reviews</div>
+        
+        <!-- Category, Price and Location -->
+        <div class="restaurant-meta">
+          <span *ngIf="cuisineType" class="meta-item">{{ cuisineType }}</span>
+          <span *ngIf="formattedPriceRange" class="meta-item">{{ formattedPriceRange }}</span>
+          <span *ngIf="restaurant.campus" class="meta-item">{{ restaurant.campus }}</span>
+        </div>
+        
+        <p class="restaurant-description" *ngIf="restaurant.description">{{ restaurant.description }}</p>
+      </div>
+      
+      <!-- Restaurant Images -->
+      <div class="restaurant-image-container" *ngIf="restaurant.imagesUrl && restaurant.imagesUrl.length > 0">
+        <img [src]="restaurant.imagesUrl[0]" [alt]="restaurant.name" class="main-image">
       </div>
     </div>
-  
-    <!-- Distribution Bars -->
-    <div class="rating-distribution">
-      <div *ngFor="let pct of ratingDistribution; let i = index" class="bar-row">
-        <span class="label">{{ 5 - i }}</span>
-        <div class="bar-bg">
-          <div class="bar-fill" [style.width.%]="pct"></div>
+    
+    <!-- Restaurant Details -->
+    <div class="info-section">
+      <div class="info-grid">
+        <!-- Address Info -->
+        <div class="info-card" *ngIf="address">
+          <div class="info-icon">
+            <i class="bi bi-geo-alt"></i>
+          </div>
+          <div class="info-content">
+            <h3>Address</h3>
+            <p>{{ address }}</p>
+          </div>
+        </div>
+        
+        <!-- Opening Hours -->
+        <div class="info-card" *ngIf="openHours">
+          <div class="info-icon">
+            <i class="bi bi-clock"></i>
+          </div>
+          <div class="info-content">
+            <h3>Opening Hours</h3>
+            <p>{{ openHours }}</p>
+          </div>
+        </div>
+        
+        <!-- Phone -->
+        <div class="info-card" *ngIf="restaurant.phone">
+          <div class="info-icon">
+            <i class="bi bi-telephone"></i>
+          </div>
+          <div class="info-content">
+            <h3>Phone</h3>
+            <p>{{ restaurant.phone }}</p>
+          </div>
+        </div>
+        
+        <!-- Website -->
+        <div class="info-card" *ngIf="restaurant.websiteUrl">
+          <div class="info-icon">
+            <i class="bi bi-globe"></i>
+          </div>
+          <div class="info-content">
+            <h3>Website</h3>
+            <a [href]="restaurant.websiteUrl" target="_blank">Visit website</a>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Write a Review -->
-    <div class="write-review">
-      <h3>Write a Review</h3>
-  
-      <!-- Star-rating selector -->
-      <div class="rating-input">
-        <label for="rating-select">Your Rating:</label>
-        <select id="rating-select" [(ngModel)]="newRating">
-          <option *ngFor="let r of [5,4,3,2,1]" [value]="r">
-            {{ r }} Star{{ r > 1 ? 's' : '' }}
-          </option>
-        </select>
-        <app-star-rating [rating]="newRating"></app-star-rating>
-      </div>
-  
-      <textarea [(ngModel)]="newReview"
-                rows="4"
-                placeholder="Write your thoughts here..."></textarea>
-      <button class="submit-review" (click)="postReview()">Post Review</button>
-    </div>
-  
     <!-- Reviews Section -->
     <div class="reviews-section">
-      <h2>Reviews</h2>
-  
-      <!-- Sort Options -->
-      <div class="sort-options">
-        <button *ngFor="let opt of sortOptions"
-                [class.active]="sortBy === opt"
-                (click)="sortBy = opt">
-          {{ opt }}
-        </button>
+      <div class="reviews-header">
+        <h2>Reviews</h2>
+        
+        <!-- Summary + Filter Controls -->
+        <div class="reviews-controls">
+          <!-- Rating Distribution -->
+          <div class="rating-distribution">
+            <div class="distribution-summary">
+              <div class="average-display">
+                <div class="big-rating">{{ averageRating.toFixed(1) }}</div>
+                <div class="out-of">out of 5</div>
+              </div>
+              <div class="bar-container">
+                <div *ngFor="let pct of ratingDistribution; let i = index" class="rating-bar">
+                  <div class="bar-label">{{ 5 - i }}</div>
+                  <div class="bar-track">
+                    <div class="bar-fill" [style.width.%]="pct"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Sort Controls -->
+          <div class="sort-controls">
+            <div class="sort-label">Sort by:</div>
+            <div class="sort-options">
+              <button *ngFor="let opt of sortOptions"
+                      [class.active]="sortBy === opt"
+                      (click)="sortBy = opt">
+                {{ opt }}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-  
-      <!-- Scrollable list of review cards -->
+      
+      <!-- Write a Review -->
+      <div class="write-review-section">
+        <h3>Write a Review</h3>
+        
+        <!-- Login Required Message -->
+        <div *ngIf="!isUserLoggedIn()" class="login-required-message">
+          <div class="lock-icon"><i class="bi bi-lock"></i></div>
+          <p>Please login to post a review</p>
+          <button class="login-btn" (click)="openAuthModal()">Login</button>
+        </div>
+        
+        <!-- Review Form (only shown when logged in) -->
+        <div class="review-form" *ngIf="isUserLoggedIn()">
+          <div class="rating-select">
+            <div class="rating-label">Your rating</div>
+            <div class="rating-options">
+              <app-star-rating [rating]="newRating" [interactive]="true" (ratingChange)="newRating = $event"></app-star-rating>
+            </div>
+          </div>
+          
+          <div class="review-text-area">
+            <textarea [(ngModel)]="newReview"
+                      rows="4"
+                      maxlength="200"
+                      placeholder="Share your experience at this restaurant..."></textarea>
+            <div class="character-count" [ngClass]="{'text-red-500': newReview.length > 180}">
+              {{ newReview.length }}/200
+            </div>
+          </div>
+          
+          <div class="image-upload-section">
+            <label class="image-upload-label">Add photos (max 3)</label>
+            <div class="image-upload-container">
+              <div class="image-preview-list">
+                <div *ngFor="let img of reviewImages; let i = index" class="image-preview-item">
+                  <img [src]="img.preview" alt="Preview" class="preview-image" />
+                  <button class="remove-image-btn" (click)="removeImage(i)" title="Remove image">×</button>
+                </div>
+                
+                <label *ngIf="reviewImages.length < 3" class="image-upload-btn">
+                  <input type="file" 
+                         accept="image/*" 
+                         class="hidden-input" 
+                         (change)="onImageSelected($event)"
+                         [disabled]="reviewImages.length >= 3">
+                  <div class="upload-icon">+</div>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button class="submit-review" (click)="postReview()" [disabled]="isSubmitting">
+              <span *ngIf="!isSubmitting">Post</span>
+              <span *ngIf="isSubmitting" class="spinner-small"></span>
+            </button>
+          </div>
+          
+          <!-- Success Message -->
+          <div *ngIf="showSuccessMessage" class="success-message">
+            <div class="success-icon">✓</div>
+            <span>Your review has been posted successfully!</span>
+          </div>
+          
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="error-message">
+            <div class="error-icon">!</div>
+            <span>{{ errorMessage }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Review List -->
       <div class="review-list">
         <div *ngFor="let r of sortedReviews" class="review-card">
-          <div class="review-header">
-            <div class="reviewer-avatar">{{ r.name.charAt(0) }}</div>
-            <div>
-              <strong>{{ r.name }}</strong>
+          <div class="review-author">
+            <div class="avatar">{{ r.name.charAt(0) }}</div>
+            <div class="author-info">
+              <div class="author-name">{{ r.name }}</div>
               <div class="review-meta">{{ r.meta }}</div>
             </div>
           </div>
-          <div class="review-rating">
-            <app-star-rating [rating]="r.rating"></app-star-rating>
+          
+          <div class="review-content">
+            <div class="review-rating">
+              <app-star-rating [rating]="r.rating"></app-star-rating>
+            </div>
+            <div class="review-text">{{ r.text }}</div>
+            
+            <div *ngIf="r.images && r.images.length > 0" class="review-images">
+              <img *ngFor="let img of r.images" [src]="img" alt="Review photo" class="review-image">
+            </div>
           </div>
-          <div class="review-body">{{ r.text }}</div>
         </div>
       </div>
     </div>
-  
   </div>
+  
+  <!-- No restaurant data at all -->
+  <div *ngIf="!loading && !error && !restaurant" class="error-container">
+    <div class="error-message">
+      <p>Restaurant information could not be loaded</p>
+      <button (click)="fetchRestaurantDetails()">Try Again</button>
+    </div>
+  </div>
+</div>
   

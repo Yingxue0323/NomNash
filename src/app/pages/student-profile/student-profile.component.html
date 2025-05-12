@@ -4,60 +4,58 @@
     <div class="sidebar">
       <button class="back-button" (click)="goBack()">&larr;</button>
   
-      <div class="logo-container">
-        <img src="assets/nomnash-logo.png" alt="NomNash Logo" class="sidebar-logo">
-      </div>
       <div class="user-info">
-        <div class="user-name">{{ profile.name.split(' ')[0] }}</div>
-        <div class="user-role">Student Account</div>
+        <div class="avatar-container">
+          <img [src]="profile.avatar" 
+               alt="{{ profile.name }}'s Avatar" 
+               class="user-avatar"
+               (error)="handleImageError($event)">
+        </div>
+        <div class="user-name">{{ profile.name }}</div>
+        <div class="user-role">{{ profile.role === 'OWNER' ? 'Business Owner' : 'Student' }}</div>
+        <div class="user-since">Member since: {{ formatDate(profile.createdAt) }}</div>
       </div>
     </div>
   
     <!-- Main Content -->
     <div class="main-content">
-      <!-- Header -->
-      <div class="top-header">
-        <div class="app-title">
-          <span class="app-name">NomNash</span>
-          <span class="app-tagline">food on campus.</span>
-        </div>
-        <div class="header-actions">
-          <!-- search icon removed -->
-          <div class="user-avatar">
-            <img src="assets/avatar-placeholder.png" alt="User Avatar">
-          </div>
-        </div>
+      <!-- Loading State -->
+      <div *ngIf="loading" class="loading-container">
+        <div class="loading-spinner"></div>
+        <p>Loading your profile...</p>
       </div>
   
-      <!-- Profile + Boxes -->
-      <div class="profile-content">
-        <!-- Profile Details -->
-        <div class="profile-details">
-          <div class="detail-row">
-            <div class="detail-label">Name</div>
-            <div class="detail-value">
-              <input type="text" [disabled]="!isEditing" [(ngModel)]="profile.name">
-            </div>
-            <div class="detail-label">Email</div>
-            <div class="detail-value">
-              <input type="email" [disabled]="!isEditing" [(ngModel)]="profile.email">
-            </div>
+      <!-- Error State -->
+      <div *ngIf="error" class="error-container">
+        <i class="bi bi-exclamation-triangle"></i>
+        <p>{{ error }}</p>
+        <button (click)="fetchUserProfile()" class="retry-btn">Try Again</button>
+      </div>
+  
+      <!-- Profile Content -->
+      <div *ngIf="!loading && !error" class="profile-content">
+        <!-- Profile Card -->
+        <div class="profile-card">
+          <div class="card-header">
+            <h2><i class="bi bi-person"></i> Profile Information</h2>
           </div>
-          <div class="detail-row">
-            <div class="detail-label">Role</div>
-            <div class="detail-value">
-              <input type="text" [disabled]="!isEditing" [(ngModel)]="profile.role">
+          <div class="card-body">
+            <div class="profile-field">
+              <div class="field-label">Name</div>
+              <div class="field-value">{{ profile.name }}</div>
             </div>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label">Password</div>
-            <div class="detail-value">
-              <input type="password" [disabled]="!isEditing" [(ngModel)]="profile.password">
+            <div class="profile-field">
+              <div class="field-label">Email</div>
+              <div class="field-value">{{ profile.email }}</div>
             </div>
-          </div>
-          <div class="profile-actions">
-            <button class="edit-btn" *ngIf="!isEditing" (click)="toggleEdit()">Edit</button>
-            <button class="save-btn" *ngIf="isEditing" (click)="saveChanges()">Save Changes</button>
+            <div class="profile-field">
+              <div class="field-label">Role</div>
+              <div class="field-value">{{ profile.role === 'OWNER' ? 'Business Owner' : 'Student' }}</div>
+            </div>
+            <div class="profile-field">
+              <div class="field-label">Last Login</div>
+              <div class="field-value">{{ formatDate(profile.lastLoginAt) }}</div>
+            </div>
           </div>
         </div>
   
@@ -66,20 +64,24 @@
           <!-- Favourites -->
           <div class="box favourites-box">
             <div class="box-header">
-              <h2>Favourites <span class="favourite-header-star">★</span></h2>
+              <h2><i class="bi bi-star-fill"></i> Favourites</h2>
             </div>
             <div class="box-content">
-              <div class="favourites-scroller">
+              <div *ngIf="favouriteRestaurants.length === 0" class="empty-state">
+                <p>You haven't added any favorites yet.</p>
+                <a routerLink="/home" class="empty-action">Explore restaurants</a>
+              </div>
+              <div *ngIf="favouriteRestaurants.length > 0" class="favourites-scroller">
                 <div class="favourite-item" *ngFor="let fav of favouriteRestaurants">
                   {{ fav }}
                 </div>
               </div>
             </div>
-            <div class="box-footer">
+            <div *ngIf="favouriteRestaurants.length > 0" class="box-footer">
               <div class="pagination">
-                … <span class="page-control">&lt;</span>
+                <button class="page-control" [disabled]="true">&lt;</button>
                 Page 1 of {{ favTotalPages }}
-                <span class="page-control">&gt;</span> …
+                <button class="page-control" [disabled]="true">&gt;</button>
               </div>
             </div>
           </div>
@@ -87,29 +89,37 @@
           <!-- Reviews -->
           <div class="box reviews-box">
             <div class="box-header">
-              <h2>Reviews</h2>
-              <div class="star-header">
-                <ng-container *ngFor="let _ of [1,2,3,4,5]">
-                  <i class="star-outline"></i>
-                </ng-container>
-              </div>
+              <h2><i class="bi bi-chat-square-text"></i> Reviews</h2>
             </div>
             <div class="box-content">
-              <div class="reviews-scroller">
+              <div *ngIf="pastReviews.length === 0" class="empty-state">
+                <p>You haven't written any reviews yet.</p>
+                <a routerLink="/home" class="empty-action">Write a review</a>
+              </div>
+              <div *ngIf="pastReviews.length > 0" class="reviews-scroller">
                 <div class="review-item" *ngFor="let r of pastReviews">
                   <div class="review-title">{{ r.restaurantName }}</div>
-                  <div class="review-actions">Edit / Delete</div>
+                  <div class="review-actions">
+                    <button class="action-btn" disabled><i class="bi bi-pencil"></i></button>
+                    <button class="action-btn" disabled><i class="bi bi-trash"></i></button>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="box-footer">
+            <div *ngIf="pastReviews.length > 0" class="box-footer">
               <div class="pagination">
-                … <span class="page-control">&lt;</span>
+                <button class="page-control" [disabled]="true">&lt;</button>
                 Page 1 of {{ reviewTotalPages }}
-                <span class="page-control">&gt;</span> …
+                <button class="page-control" [disabled]="true">&gt;</button>
               </div>
             </div>
           </div>
+        </div>
+        
+        <!-- Google Account Notice -->
+        <div class="google-account-notice">
+          <i class="bi bi-google"></i>
+          <p>Your account is linked with Google. Profile information is managed through your Google account.</p>
         </div>
       </div>
     </div>

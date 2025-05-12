@@ -4,17 +4,39 @@
       <app-search-form></app-search-form>
     </div>
   </section>
-  <section class="py-8">
+  
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="container px-4 md:px-6 py-8 flex justify-center">
+    <div class="text-center">
+      <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-600 border-r-transparent"></div>
+      <p class="mt-2 text-gray-600">Loading restaurants...</p>
+    </div>
+  </div>
+  
+  <!-- Error Message -->
+  <div *ngIf="error && !isLoading" class="container px-4 md:px-6 py-8">
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+      <strong class="font-bold">Error!</strong>
+      <span class="block sm:inline">{{ error }}</span>
+      <button class="absolute top-0 bottom-0 right-0 px-4 py-3" (click)="fetchRestaurants()">
+        <span class="text-red-500 hover:text-red-800">Retry</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Restaurant List -->
+  <section *ngIf="restaurants.length > 0 && !isLoading" class="py-8">
     <div class="container px-4 md:px-6">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold">Top-Rated</h2>
-        <a href="#" class="text-red-600 hover:underline">
-          View all
+        <h2 class="text-2xl font-bold">Popular Restaurants</h2>
+        <a routerLink="/restaurants" class="text-red-600 hover:underline">
+          View All
         </a>
       </div>
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <app-restaurant-card
           *ngFor="let restaurant of restaurants"
+          [id]="restaurant.id"
           [name]="restaurant.name"
           [image]="restaurant.image"
           [rating]="restaurant.rating"
@@ -28,26 +50,15 @@
     </div>
   </section>
 
-  <section class="py-8 bg-gray-100">
+  <!-- No Data Message -->
+  <section *ngIf="restaurants.length === 0 && !isLoading && !error" class="py-8">
     <div class="container px-4 md:px-6">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold">Near You</h2>
-        <a href="#" class="text-red-600 hover:underline">
-          View all
-        </a>
-      </div>
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-        <app-restaurant-card
-          *ngFor="let restaurant of restaurants"
-          [name]="restaurant.name"
-          [image]="restaurant.image"
-          [rating]="restaurant.rating"
-          [reviews]="restaurant.reviews"
-          [cuisine]="restaurant.cuisine"
-          [priceRange]="restaurant.priceRange"
-          [location]="restaurant.location"
-          [phone]="restaurant.phone"
-        ></app-restaurant-card>
+      <div class="text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No restaurants found</h3>
+        <p class="mt-1 text-sm text-gray-500">There are no restaurants matching your criteria.</p>
       </div>
     </div>
   </section>

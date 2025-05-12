@@ -56,6 +56,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "src/proxy.conf.json",
+            "browserTarget": "opentable-clone:build:development"
+          },
           "configurations": {
             "production": {
               "browserTarget": "opentable-clone:build:production"

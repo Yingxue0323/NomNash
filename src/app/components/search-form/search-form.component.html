@@ -1,5 +1,5 @@
 <div class="mx-auto max-w-3xl">
-  <form>
+  <form name="filterForm">
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-4 md:gap-2">
 
@@ -21,12 +21,16 @@
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
           </svg>
 
-          <select id="rating-filter" name="rating-filter" class="w-full flex-grow bg-transparent outline-none border-none">
-            <option value="5star">5</option>
-            <option value="4star">4</option>
-            <option value="3star">3</option>
-            <option value="2star">2</option>
-            <option value="1star">1</option>
+          <select 
+            id="rating-filter" 
+            name="rating-filter" 
+            class="w-full flex-grow bg-transparent outline-none border-none"
+            [(ngModel)]="filterOptions.rating">
+            <option [ngValue]="null">All Ratings</option>
+            <option [ngValue]="4">4+ Stars</option>
+            <option [ngValue]="3">3+ Stars</option>
+            <option [ngValue]="2">2+ Stars</option>
+            <option [ngValue]="1">1+ Stars</option>
           </select>
           
         </div>
@@ -38,12 +42,16 @@
 
           <span class="flex items-center text-2xl opacity-50 mr-2" style="user-select: none;">$</span>
 
-          <select id="price-filter" name="price-filter" class="w-full flex-grow bg-transparent outline-none border-none">
-            <option value="1"><$20</option>
-            <option value="2">$20-$40</option>
-            <option value="3">$40-$60</option>
-            <option value="4">$60-$100</option>
-            <option value="5">>$100</option>
+          <select 
+            id="price-filter" 
+            name="price-filter" 
+            class="w-full flex-grow bg-transparent outline-none border-none"
+            [(ngModel)]="filterOptions.priceRange">
+            <option [ngValue]="null">All Prices</option>
+            <option [ngValue]="20">Under $20</option>
+            <option [ngValue]="40">Under $40</option>
+            <option [ngValue]="60">Under $60</option>
+            <option [ngValue]="80">Under $80</option>
           </select>
 
         </div>
@@ -55,21 +63,42 @@
           
           <span class="flex items-center text-2xl opacity-50 mr-2" style="user-select: none;">☕︎</span>
 
-          <select id="cuisine-filter" name="cuisine-filter" class="w-full flex-grow bg-transparent outline-none border-none">
-            <option value="italian">Italian</option>
-            <option value="mexican">Mexican</option>
-            <option value="asian">Asian</option>
-            <option value="cafe">Cafe</option>
-            <option value="drinks">Drinks</option>
+          <select 
+            id="cuisine-filter" 
+            name="cuisine-filter" 
+            class="w-full flex-grow bg-transparent outline-none border-none"
+            [(ngModel)]="filterOptions.category">
+            <option [ngValue]="null">All Categories</option>
+            <option value="CAFE">Cafe</option>
+            <option value="CHINESE">Chinese</option>
+            <option value="SOUTH_EAST_ASIAN">South East Asian</option>
+            <option value="JAPANESE">Japanese</option>
+            <option value="MEXICAN">Mexican</option>
+            <option value="ITALIAN">Italian</option>
+            <option value="INDIAN">Indian</option>
+            <option value="KOREAN">Korean</option>
+            <option value="FAST_FOOD">Fast Food</option>
+            <option value="BAR">Bar</option>
+            <option value="PUB">Pub</option>
+            <option value="OTHER">Other</option>
           </select>
           
         </div>
       </div>
 
-      <!-- submit -->
-      <div class="relative md:col-span-1">
-        <button class="bg-[#EF5252] hover:bg-[#CCDF92] text-white font-medium py-2 px-4 rounded">
+      <!-- buttons -->
+      <div class="relative md:col-span-1 flex gap-2">
+        <button 
+          type="button"
+          class="bg-[#EF5252] hover:bg-[#d83a3a] text-white font-medium py-2 px-4 rounded"
+          (click)="applyFilter()">
           Filter
+        </button>
+        <button 
+          type="button"
+          class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded"
+          (click)="resetFilter()">
+          Reset
         </button>
       </div>
 
