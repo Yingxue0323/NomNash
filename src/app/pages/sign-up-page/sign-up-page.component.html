@@ -16,18 +16,18 @@
 
               <div class="form-group mb-3">
                 <label for="username" class="form-label text-[#EF5252] fs-5">Your username:</label>
-                <input type="username" class="form-control username-input" id="username" placeholder="Enter username" name="username" [(ngModel)]="user.name" required>
+                <input type="username" class="form-control username-input" id="username" placeholder="Enter username" name="username" required>
               </div>
 
               <p class="text-[#EF5252] mb-3 fs-5">Your role:</p>
               <div class="form-check">
-                <input class="form-check-input radio-pink" type="radio" name="role" id="student-visitor" [(ngModel)]="user.role" checked>
+                <input class="form-check-input radio-pink" type="radio" name="role" id="student-visitor" checked>
                 <label class="form-check-label text-[#F38181] ms-2" for="student-visitor">
                   Student
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input radio-pink" type="radio" name="role" id="business-owner" [(ngModel)]="user.role">
+                <input class="form-check-input radio-pink" type="radio" name="role" id="business-owner">
                 <label class="form-check-label text-[#F38181] ms-2" for="business-owner">
                   Business Owner
                 </label>

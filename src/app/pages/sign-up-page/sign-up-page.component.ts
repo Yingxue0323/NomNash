@@ -14,13 +14,13 @@ import { User } from 'src/app/models/user';
 })
 export class SignUpPageComponent {
 
-  user: User = new User();
+  // user: User = new User();
 
-  constructor(private db: DatabaseService, private router: Router) {}
+  // constructor(private db: DatabaseService, private router: Router) {}
 
-  addUser() {
-    this.db.addUser(this.user).subscribe((response) => {
-      this.router.navigate(['/login']);
-    });
-  }
+  // addUser() {
+  //   this.db.addUser(this.user).subscribe((response) => {
+  //     this.router.navigate(['/login']);
+  //   });
+  // }
 }
